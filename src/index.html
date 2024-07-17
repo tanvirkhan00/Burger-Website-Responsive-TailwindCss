@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./output.css" rel="stylesheet">
+
+  <!------------ Favicon -------------->
+  <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+
+  <title>responsive || burger website</title>
+</head>
+<body>
+
+
+    <!-- ----------------- Header ----------------------- -->
+    <header class="bg-primaryColor fixed top-0 left-0 w-full z-50">
+      <nav class="container relative h-14 flex justify-between items-center">
+        <div class="">
+          <a href="#" class="text-2xl uppercase font-oswald">Bur<span class="text-secondaryColor">ger</span></a>
+        </div>
+
+        <div class=" hidden absolute top-0 left-0 w-full py-14 bg-primaryColor border-b border-secondaryColor md:block md:static md:py-0 md:border-none md:w-auto md:ml-auto" id="nav-menu">
+          <ul class="flex flex-col text-center gap-5 md:flex-row">
+            <li>
+              <a href="#home" class="nav__link text-secondaryColor hover:text-secondaryColor ease-in-out duration-300">Home</a>
+            </li>
+            <li>
+              <a href="#about" class="nav__link hover:text-secondaryColor ease-in-out duration-300">About Us</a>
+            </li>
+            <li>
+              <a href="#menu" class="nav__link hover:text-secondaryColor ease-in-out duration-300">Menu</a>
+            </li>
+            <li>
+              <a href="#review" class="nav__link hover:text-secondaryColor ease-in-out duration-300">Review</a>
+            </li>
+            <li>
+              <a href="#contact" class="nav__link hover:text-secondaryColor ease-in-out duration-300">Contact</a>
+            </li>
+          </ul>
+          <div class="absolute top-[0.7rem] right-4 text-2xl cursor-pointer md:hidden" id="nav-close">
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+        </div>
+        <div class="flex items-center gap-5">
+            <i class="fa-regular fa-moon cursor-pointer text-xl ml-4"></i>
+          <div class="md:hidden" id="hamburger">
+            <i class="fa-solid fa-bars cursor-pointer text-xl"></i>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+    <!-- ---------------Home------------------ -->
+
+    <section id="home">
+      <div class="container flex flex-col items-center gap-10 md:flex-row">
+        <div class="mx-auto md:basis-1/2 lg:basis-2/5 animate-movingY">
+          <img src="/img/home-image.png" alt="" class="w-60 md:w-full">
+        </div>
+
+
+        <div class="text-center md:basis-1/2 md:text-start lg:basis-3/5">
+          <h1 class="home__title">Happy Tummy With Tasty Burgers.</h1>
+          <div class="separator mx-auto md:mx-0"></div>
+          <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ea eum hic sunt nemo laudantium harum? Harum maxime sit expedita aut rem! Obcaecati sed soluta nisi incidunt nesciunt rem amet!</p>
+          <div class="text-base flex item-center justify-center gap-4 py-10 md:justify-start md:gap-20">
+            <div class="text-center">
+              <i class="fa-solid fa-utensils text-secondaryColor text-4xl"></i>
+              <br>
+              Delicious
+            </div>
+
+            <div class="text-center">
+              <i class="fa-solid fa-droplet text-secondaryColor text-4xl"></i>
+              <br>
+              Fresh
+            </div>
+
+            <div class="text-center">
+              <i class="fa-brands fa-envira text-secondaryColor text-4xl"></i>
+              <br>
+              Organic
+            </div>
+          </div>
+          <a href="#" class="btn btn-primary">Learn more</a>
+        </div>
+      </div>
+    </section>
+
+
+
+  <!-- Font Awsome Link -->
+  <script src="https://kit.fontawesome.com/862c32b35b.js" crossorigin="anonymous"></script>
+
+  <!-- Js Link -->
+   <script src="main.js"></script>
+</body>
+</html>
