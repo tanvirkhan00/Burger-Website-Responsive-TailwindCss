@@ -692,8 +692,16 @@ section{
   margin-left: 1rem;
 }
 
+.block{
+  display: block;
+}
+
 .flex{
   display: flex;
+}
+
+.grid{
+  display: grid;
 }
 
 .hidden{
@@ -704,8 +712,16 @@ section{
   height: 3.5rem;
 }
 
+.h-56{
+  height: 14rem;
+}
+
 .w-28{
   width: 7rem;
+}
+
+.w-40{
+  width: 10rem;
 }
 
 .w-60{
@@ -716,8 +732,24 @@ section{
   width: 100%;
 }
 
-.w-40{
-  width: 10rem;
+.w-20{
+  width: 5rem;
+}
+
+.w-36{
+  width: 9rem;
+}
+
+.w-32{
+  width: 8rem;
+}
+
+.max-w-md{
+  max-width: 28rem;
+}
+
+.flex-1{
+  flex: 1 1 0%;
 }
 
 .basis-1\/3{
@@ -738,8 +770,24 @@ section{
   cursor: pointer;
 }
 
+.grid-cols-2{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-1{
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
 .flex-col{
   flex-direction: column;
+}
+
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+.place-items-center{
+  place-items: center;
 }
 
 .items-center{
@@ -758,12 +806,22 @@ section{
   gap: 2.5rem;
 }
 
+.gap-3{
+  gap: 0.75rem;
+}
+
 .gap-4{
   gap: 1rem;
 }
 
 .gap-5{
   gap: 1.25rem;
+}
+
+.space-y-1 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]){
@@ -778,6 +836,10 @@ section{
 
 .rounded-lg{
   border-radius: 0.5rem;
+}
+
+.rounded-3xl{
+  border-radius: 1.5rem;
 }
 
 .border-b{
@@ -799,6 +861,11 @@ section{
   background-color: rgb(1 10 94 / var(--tw-bg-opacity));
 }
 
+.bg-primaryColorLight{
+  --tw-bg-opacity: 1;
+  background-color: rgb(1 13 120 / var(--tw-bg-opacity));
+}
+
 .bg-redColor{
   --tw-bg-opacity: 1;
   background-color: rgb(204 52 51 / var(--tw-bg-opacity));
@@ -807,11 +874,6 @@ section{
 .bg-secondaryColor{
   --tw-bg-opacity: 1;
   background-color: rgb(255 204 0 / var(--tw-bg-opacity));
-}
-
-.bg-primaryColorLight{
-  --tw-bg-opacity: 1;
-  background-color: rgb(1 13 120 / var(--tw-bg-opacity));
 }
 
 .p-5{
@@ -831,6 +893,11 @@ section{
 .py-3{
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.py-5{
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
 .pt-5{
@@ -879,6 +946,11 @@ section{
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
+.text-paragraphColor{
+  --tw-text-opacity: 1;
+  color: rgb(192 192 192 / var(--tw-text-opacity));
+}
+
 .text-secondaryColor{
   --tw-text-opacity: 1;
   color: rgb(255 204 0 / var(--tw-text-opacity));
@@ -888,12 +960,21 @@ section{
   transition-duration: 300ms;
 }
 
+.duration-200{
+  transition-duration: 200ms;
+}
+
 .ease-in-out{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.ease-linear{
+  transition-timing-function: linear;
+}
+
 .home__title,
-    .card__title{
+    .card__title,
+    .section__title{
   font-family: Oswald, sans-serif;
   font-size: 2.25rem;
   line-height: 2.5rem;
@@ -902,10 +983,17 @@ section{
 
 @media (min-width: 1024px){
   .home__title,
-    .card__title{
+    .card__title,
+    .section__title{
     font-size: 3.75rem;
     line-height: 1;
   }
+}
+
+.section__title{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  text-transform: uppercase;
 }
 
 .card__title{
@@ -930,14 +1018,18 @@ section{
   color: rgb(192 192 192 / var(--tw-text-opacity));
 }
 
-@keyframes spin{
-  to{
-    transform: rotate(360deg);
-  }
+.tabs_wrap ul li:hover,
+.tabs_wrap ul li.active{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 204 0 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-.hover\:animate-spin:hover{
-  animation: spin 1s linear infinite;
+.hover\:scale-110:hover{
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 @keyframes move{
@@ -948,6 +1040,11 @@ section{
 
 .hover\:animate-movingY:hover{
   animation: move 3s linear infinite;
+}
+
+.hover\:bg-secondaryColor:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 204 0 / var(--tw-bg-opacity));
 }
 
 .hover\:text-secondaryColor:hover{
@@ -970,11 +1067,6 @@ section{
     margin-right: 1.25rem;
   }
 
-  .md\:mx-10{
-    margin-left: 2.5rem;
-    margin-right: 2.5rem;
-  }
-
   .md\:ml-auto{
     margin-left: auto;
   }
@@ -995,6 +1087,22 @@ section{
     width: 100%;
   }
 
+  .md\:w-48{
+    width: 12rem;
+  }
+
+  .md\:w-44{
+    width: 11rem;
+  }
+
+  .md\:w-36{
+    width: 9rem;
+  }
+
+  .md\:w-32{
+    width: 8rem;
+  }
+
   .md\:flex-1{
     flex: 1 1 0%;
   }
@@ -1003,12 +1111,8 @@ section{
     flex-basis: 50%;
   }
 
-  .md\:grid-flow-col{
-    grid-auto-flow: column;
-  }
-
-  .md\:grid-cols-3{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .md\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .md\:flex-row{
@@ -1021,10 +1125,6 @@ section{
 
   .md\:justify-start{
     justify-content: flex-start;
-  }
-
-  .md\:justify-between{
-    justify-content: space-between;
   }
 
   .md\:gap-20{
@@ -1050,6 +1150,18 @@ section{
 }
 
 @media (min-width: 1024px){
+  .lg\:h-40{
+    height: 10rem;
+  }
+
+  .lg\:w-24{
+    width: 6rem;
+  }
+
+  .lg\:w-20{
+    width: 5rem;
+  }
+
   .lg\:flex-1{
     flex: 1 1 0%;
   }
@@ -1062,6 +1174,10 @@ section{
     flex-basis: 60%;
   }
 
+  .lg\:grid-cols-4{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .lg\:flex-row{
     flex-direction: row;
   }
@@ -1072,5 +1188,9 @@ section{
 
   .lg\:gap-10{
     gap: 2.5rem;
+  }
+
+  .lg\:gap-12{
+    gap: 3rem;
   }
 }
