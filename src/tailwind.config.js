@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,js}"],
+  darkMode: 'selector',
   theme: {
     screens:{
       sm:"480px",
@@ -17,6 +18,7 @@ module.exports = {
         blackColor:'#000',
         greenColor:'#007936',
         redColor:'#cc3433',
+        darkColor:'#000',
         darkColorLight:'#171717',
       },
       keyframes: {

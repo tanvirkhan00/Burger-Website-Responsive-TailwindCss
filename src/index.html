@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +9,22 @@
   <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
 
   <!------- Swiper's CSS' -------->
-  <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <title>responsive || burger website</title>
 </head>
 <body>
 
 
-    <!-- ----------------- Header ----------------------- -->
-    <header class="bg-primaryColor fixed top-0 left-0 w-full z-50">
+    <!-- -------------- Header ----------------->
+    <header class="bg-primaryColor fixed top-0 left-0 w-full z-50" id="header">
       <nav class="container relative h-14 flex justify-between items-center">
         <div class="">
           <a href="#" class="text-2xl uppercase font-oswald">Bur<span class="text-secondaryColor">ger</span></a>
         </div>
 
-        <div class=" hidden absolute top-0 left-0 w-full py-14 bg-primaryColor border-b border-secondaryColor md:block md:static md:py-0 md:border-none md:w-auto md:ml-auto" id="nav-menu">
+        <div class="hidden absolute top-0 left-0 w-full py-14 bg-primaryColor border-b border-secondaryColor md:block md:static md:py-0 md:border-none md:w-auto md:ml-auto" id="nav-menu">
           <ul class="flex flex-col text-center gap-5 md:flex-row">
             <li>
               <a href="#home" class="nav__link text-secondaryColor hover:text-secondaryColor ease-in-out duration-300">Home</a>
@@ -49,7 +47,7 @@
           </div>
         </div>
         <div class="flex items-center gap-5">
-            <i class="fa-regular fa-moon cursor-pointer text-xl ml-4 hover:text-blackColor"></i>
+            <i class="fa-regular fa-moon cursor-pointer text-xl ml-4 hover:text-blackColor" id="theme-toggle"></i>
           <div class="md:hidden" id="hamburger">
             <i class="fa-solid fa-bars cursor-pointer text-xl hover:text-secondaryColor"></i>
           </div>
@@ -100,9 +98,9 @@
     <section id="category">
       <div class="container flex flex-col gap-5 md:flex-row">
         <!-- Card 1 -->
-         <div class="bg-secondaryColor flex py-3 rounded-lg overflow-hidden md:flex-1 border-2 border-transparent hover:border-2 hover:border-greenColor">
+         <div class="bg-secondaryColor flex py-3 rounded-lg overflow-hidden md:flex-1 border-2 border-transparent hover:border-2 hover:border-greenColor ease-linear duration-200">
             <div class="basis-1/3 relative">
-              <img src="/img/burger-1.png" alt="" class="w-28 -bottom-4 -left-4 absolute">
+              <img src="/img/burger-1.png" alt="" class="w-28 -bottom-4 -left-4 absolute hover:scale-110 ease-linear duration-200">
             </div>
 
             <div>
@@ -116,9 +114,9 @@
 
 
         <!-- Card 2 -->
-         <div class="bg-redColor flex py-3 rounded-lg overflow-hidden md:flex-1 border-2 border-transparent hover:border-2 hover:border-greenColor">
+         <div class="bg-redColor flex py-3 rounded-lg overflow-hidden md:flex-1 border-2 border-transparent hover:border-2 hover:border-greenColor ease-linear duration-200">
             <div class="basis-1/3 relative">
-              <img src="/img/snack-1.png" alt="" class="w-28 -bottom-4 -left-4 absolute">
+              <img src="/img/snack-1.png" alt="" class="w-28 -bottom-4 -left-4 absolute hover:scale-110 ease-linear duration-200">
             </div>
 
             <div>
@@ -132,9 +130,9 @@
 
 
         <!-- Card 3 -->
-         <div class="bg-greenColor flex py-3 rounded-lg overflow-hidden md:flex-1 border-2 border-transparent hover:border-2 hover:border-secondaryColor">
+         <div class="bg-greenColor flex py-3 rounded-lg overflow-hidden md:flex-1 border-2 border-transparent hover:border-2 hover:border-secondaryColor ease-linear duration-200">
             <div class="basis-1/3 relative">
-              <img src="/img/beverage-2.png" alt="" class="w-28 -bottom-4 -left-4 absolute">
+              <img src="/img/beverage-2.png" alt="" class="w-28 -bottom-4 -left-4 absolute hover:scale-110 ease-linear duration-200">
             </div>
 
             <div>
@@ -613,6 +611,13 @@
     </footer>
 
 
+    <!------------------ Scroll Up -------------->
+
+    <a href="" class="fixed right-4 bg-secondaryColor shadow-sm inline-block px-4 py-2 rounded-full text-lg text-blackColor z-50 -bottom-1/2 hover:translate-y-1 ease-in duration-200" id="scroll-up">
+      <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
+
   <!-- Font Awsome Link -->
   <script src="https://kit.fontawesome.com/862c32b35b.js" crossorigin="anonymous"></script>
 
@@ -622,6 +627,7 @@
   <script>
     const swiper = new Swiper('.swiper', {
       speed: 400,
+      loop:true,
       spaceBetween: 30,
       autoplay: {
       delay: 3000,
