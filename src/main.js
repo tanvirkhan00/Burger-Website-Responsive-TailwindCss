@@ -1,21 +1,24 @@
-const hamburger =document.getElementById('hamburger');
-const navMenu =document.getElementById('nav-menu');
-const closeIcon =document.getElementById('nav-close');
-const navLink =document.querySelectorAll('.nav__link');
+// --------------- NAV MENU ---------------------
 
-navLink.forEach(link => 
-    link.addEventListener("click", () => {
-        navMenu.classList.add('hidden');
-    })
-)
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+const closeIcon = document.getElementById('nav-close');
+const navLinks = document.querySelectorAll('.nav__link');
 
-closeIcon.addEventListener("click", () => {
+hamburger.addEventListener('click', () => {
+  navMenu.classList.remove('hidden');
+});
+
+closeIcon.addEventListener('click', () => {
+  navMenu.classList.add('hidden');
+});
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
     navMenu.classList.add('hidden');
-})
+  });
+});
 
-hamburger.addEventListener("click", () => {
-       navMenu.classList.remove('hidden');
-})
 
 // --------------- TABS ---------------------
 
@@ -95,41 +98,5 @@ const scrollHeader = () => {
     }
 }
 window.addEventListener('scroll', scrollHeader) ;
-
-
-// ---------- Change Dark/Light Mode ---------
-
-const html = document.querySelector('html');
-const themeBtn = document.getElementById('theme-toggle');
-
-themeBtn.addEventListener('click', (e) => {
-    html.classList.add('dark');
-    themeBtn.classList.replace('fa-moon', 'fa-sun');
-    localStorage.setItem('mode', 'dark');
-    // if(localStorage.getItem('mode') == 'light'){
-    //     darkMode();
-    // } else {
-    //     lightMode();
-    // }
-});
-
-// function darkMode () {
-//     html.classList.add('dark');
-//     themeBtn.classList.replace('fa-moon', 'fa-sun');
-//     localStorage.setItem('mode', 'dark');
-// }
-
-// function lightMode () {
-//     html.classList.remove('dark');
-//     themeBtn.classList.replace('fa-sun', 'fa-moon');
-//     localStorage.setItem('mode', 'light');
-// }
-
-// if(localStorage.getItem('mode') == 'dark'){
-//     darkMode();
-// } else {
-//     lightMode();
-// }
-
 
 
