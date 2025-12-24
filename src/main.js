@@ -4,21 +4,35 @@ const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 const closeIcon = document.getElementById('nav-close');
 const navLinks = document.querySelectorAll('.nav__link');
+const body = document.body;
 
+// Open menu
 hamburger.addEventListener('click', () => {
-  navMenu.classList.remove('hidden');
+  navMenu.classList.add('active');
+  hamburger.classList.add('hidden');
+  body.classList.add('menu-open');
 });
 
-closeIcon.addEventListener('click', () => {
-  navMenu.classList.add('hidden');
-});
+// Close menu
+const closeMenu = () => {
+  navMenu.classList.remove('active');
+  hamburger.classList.remove('hidden');
+  body.classList.remove('menu-open');
+};
 
+closeIcon.addEventListener('click', closeMenu);
+
+// Close menu when clicking a link
 navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    navMenu.classList.add('hidden');
-  });
+  link.addEventListener('click', closeMenu);
 });
 
+// Optional: Close menu when pressing Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+    closeMenu();
+  }
+});
 
 // --------------- TABS ---------------------
 

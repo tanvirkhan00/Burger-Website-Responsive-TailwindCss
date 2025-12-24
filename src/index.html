@@ -12,6 +12,277 @@
   <!------- Swiper's CSS' -------->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+  <style>
+
+/* Hamburger Button */
+.hamburger {
+  display: block;
+  cursor: pointer;
+  z-index: 60;
+  font-size: 1.5rem;
+  color: white;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger:hover {
+  color: var(--secondaryColor, #fbbf24);
+  transform: scale(1.1);
+}
+
+.hamburger.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8);
+}
+
+/* Mobile Menu - Hidden by default */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  z-index: 9999;
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  overflow: hidden;
+  opacity: 0;
+}
+
+/* Menu Open State */
+.mobile-menu.active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1), 
+              opacity 0.3s ease;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 2rem;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10000;
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.8);
+}
+
+.mobile-menu.active .close-button {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+  transition-delay: 0.3s;
+}
+
+.close-button:hover {
+  background: var(--secondaryColor, #fbbf24);
+  color: #1e1b4b;
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+}
+
+.close-button:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+/* Menu Content - Centered */
+.menu-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 2rem;
+}
+
+/* Menu List */
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Menu Items */
+.menu-item {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Animate menu items when menu is active */
+.mobile-menu.active .menu-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mobile-menu.active .menu-item:nth-child(1) { transition-delay: 0.15s; }
+.mobile-menu.active .menu-item:nth-child(2) { transition-delay: 0.2s; }
+.mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.25s; }
+.mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.3s; }
+.mobile-menu.active .menu-item:nth-child(5) { transition-delay: 0.35s; }
+.mobile-menu.active .menu-item:nth-child(6) { transition-delay: 0.4s; }
+
+/* Menu Links */
+.menu-list .nav__link {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+.menu-list .nav__link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: var(--secondaryColor, #fbbf24);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+
+.menu-list .nav__link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(251, 191, 36, 0.1);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  z-index: -1;
+}
+
+.menu-list .nav__link:hover::before,
+.menu-list .nav__link.active-link::before {
+  width: 100%;
+}
+
+.menu-list .nav__link:hover::after,
+.menu-list .nav__link.active-link::after {
+  opacity: 1;
+}
+
+.menu-list .nav__link:hover,
+.menu-list .nav__link.active-link {
+  color: var(--secondaryColor, #fbbf24);
+  transform: translateX(15px);
+}
+
+.menu-list .nav__link:active {
+  transform: translateX(12px) scale(0.98);
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Add a subtle overlay backdrop */
+.mobile-menu::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.mobile-menu.active::before {
+  opacity: 1;
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+  
+  .mobile-menu {
+    position: static;
+    transform: none;
+    width: auto;
+    height: auto;
+    background: transparent;
+    overflow: visible;
+    opacity: 1;
+  }
+  
+  .mobile-menu::before {
+    display: none;
+  }
+  
+  .close-button {
+    display: none;
+  }
+  
+  .menu-content {
+    height: auto;
+    padding: 0;
+  }
+  
+  .menu-list {
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+  
+  .menu-item {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .menu-list .nav__link {
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.5rem 0;
+  }
+  
+  .menu-list .nav__link::after {
+    display: none;
+  }
+  
+  .menu-list .nav__link:hover {
+    transform: none;
+    text-shadow: none;
+  }
+  
+  .menu-list .nav__link:active {
+    transform: none;
+  }
+}
+
+  </style>
+
   <title>responsive || burger website</title>
 </head>
 
@@ -19,40 +290,47 @@
 
 
   <!-- -------------- Header ----------------->
-  <header class="bg-primaryColor fixed top-0 left-0 w-full z-50" id="header">
+ <header class="bg-primaryColor fixed top-0 left-0 w-full z-50" id="header">
     <nav class="container relative h-14 flex justify-between items-center px-4">
       <div>
         <a href="#" class="text-2xl uppercase font-oswald">Bur<span class="text-secondaryColor">ger</span></a>
       </div>
       
-      <div id="nav-menu" class="hidden fixed inset-0 bg-primaryColor z-[100] md:static md:block md:bg-transparent md:z-auto">
-        <div class="flex flex-col items-center justify-center h-full md:h-auto">
-          <ul class="flex flex-col text-center gap-8 md:flex-row md:gap-5">
-            <li>
-              <a href="#home" class="nav__link text-secondaryColor text-xl font-medium hover:text-secondaryColor ease-in-out duration-300 md:text-base md:font-normal">Home</a>
+      <!-- Mobile Menu - Full Screen Overlay -->
+      <div id="nav-menu" class="mobile-menu">
+        <!-- Close Button (X) -->
+        <div class="close-button" id="nav-close">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+        
+        <!-- Menu Content -->
+        <div class="menu-content">
+          <ul class="menu-list">
+            <li class="menu-item">
+              <a href="#home" class="nav__link active-link">Home</a>
             </li>
-            <li>
-              <a href="#about" class="nav__link text-xl font-medium hover:text-secondaryColor ease-in-out duration-300 md:text-base md:font-normal">About Us</a>
+            <li class="menu-item">
+              <a href="#about" class="nav__link">About</a>
             </li>
-            <li>
-              <a href="#menu" class="nav__link text-xl font-medium hover:text-secondaryColor ease-in-out duration-300 md:text-base md:font-normal">Menu</a>
+            <li class="menu-item">
+              <a href="#education" class="nav__link">Education</a>
             </li>
-            <li>
-              <a href="#review" class="nav__link text-xl font-medium hover:text-secondaryColor ease-in-out duration-300 md:text-base md:font-normal">Review</a>
+            <li class="menu-item">
+              <a href="#services" class="nav__link">Services</a>
             </li>
-            <li>
-              <a href="#contact" class="nav__link text-xl font-medium hover:text-secondaryColor ease-in-out duration-300 md:text-base md:font-normal">Contact</a>
+            <li class="menu-item">
+              <a href="#projects" class="nav__link">Projects</a>
+            </li>
+            <li class="menu-item">
+              <a href="#contact" class="nav__link">Contact</a>
             </li>
           </ul>
         </div>
-        
-        <div class="absolute top-5 right-5 text-4xl cursor-pointer text-white md:hidden" id="nav-close">
-          <i class="fa-solid fa-xmark hover:text-secondaryColor transition-colors duration-300"></i>
-        </div>
       </div>
       
-      <div class="md:hidden z-50" id="hamburger">
-        <i class="fa-solid fa-bars cursor-pointer text-2xl hover:text-secondaryColor transition-colors duration-300"></i>
+      <!-- Hamburger Icon -->
+      <div class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
       </div>
     </nav>
 </header>
