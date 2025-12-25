@@ -7,6 +7,8 @@ module.exports = {
       sm:"480px",
       md:"768px",
       lg:"1024px",
+      xl:"1280px",
+      '2xl':"1536px",
     },
     extend: {
       colors: {
@@ -35,6 +37,9 @@ module.exports = {
       padding: {
         DEFAULT:'1rem',
         sm: '1.5rem',
+        lg: '2rem',
+        xl: '2.5rem',
+        '2xl': '3rem',
       }
     },
     fontFamily: {

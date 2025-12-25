@@ -13,274 +13,290 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <style>
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      background-color: #1a1a2e;
+      transition: all 0.3s ease;
+    }
 
-/* Hamburger Button */
-.hamburger {
-  display: block;
-  cursor: pointer;
-  z-index: 60;
-  font-size: 1.5rem;
-  color: white;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
+    .header-scrolled {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      border-bottom: 2px solid #ffcc00;
+    }
 
-.hamburger:hover {
-  color: var(--secondaryColor, #fbbf24);
-  transform: scale(1.1);
-}
+    /* Hamburger Button - Mobile Only */
+    .hamburger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 60;
+      font-size: 1.5rem;
+      color: white;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 40px;
+      height: 40px;
+    }
 
-.hamburger.hidden {
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(0.8);
-}
+    .hamburger:hover {
+      color: #ffcc00;
+      transform: scale(1.1);
+    }
 
-/* Mobile Menu - Hidden by default */
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-  z-index: 9999;
-  transform: translateX(-100%);
-  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
-  overflow: hidden;
-  opacity: 0;
-}
+    .hamburger.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.8);
+    }
 
-/* Menu Open State */
-.mobile-menu.active {
-  transform: translateX(0);
-  opacity: 1;
-  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1), 
-              opacity 0.3s ease;
-}
+    /* Mobile Menu - Full Screen Overlay */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      z-index: 9999;
+      transform: translateX(-100%);
+      transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+      overflow: hidden;
+      opacity: 0;
+    }
 
-/* Close Button */
-.close-button {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 2rem;
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 10000;
-  opacity: 0;
-  transform: rotate(-90deg) scale(0.8);
-}
+    .mobile-menu.active {
+      transform: translateX(0);
+      opacity: 1;
+      transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.3s ease;
+    }
 
-.mobile-menu.active .close-button {
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-  transition-delay: 0.3s;
-}
+    /* Close Button */
+    .close-button {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 2rem;
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10000;
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.8);
+    }
 
-.close-button:hover {
-  background: var(--secondaryColor, #fbbf24);
-  color: #1e1b4b;
-  transform: rotate(90deg) scale(1.1);
-  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
-}
+    .mobile-menu.active .close-button {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+      transition-delay: 0.3s;
+    }
 
-.close-button:active {
-  transform: rotate(90deg) scale(0.95);
-}
+    .close-button:hover {
+      background: #ffcc00;
+      color: #1e1b4b;
+      transform: rotate(90deg) scale(1.1);
+      box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+    }
 
-/* Menu Content - Centered */
-.menu-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  padding: 2rem;
-}
+    /* Menu Content */
+    .menu-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      padding: 2rem;
+    }
 
-/* Menu List */
-.menu-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
-/* Menu Items */
-.menu-item {
-  opacity: 0;
-  transform: translateX(-50px);
-  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+    .menu-item {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-/* Animate menu items when menu is active */
-.mobile-menu.active .menu-item {
-  opacity: 1;
-  transform: translateX(0);
-}
+    .mobile-menu.active .menu-item {
+      opacity: 1;
+      transform: translateX(0);
+    }
 
-.mobile-menu.active .menu-item:nth-child(1) { transition-delay: 0.15s; }
-.mobile-menu.active .menu-item:nth-child(2) { transition-delay: 0.2s; }
-.mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.25s; }
-.mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.3s; }
-.mobile-menu.active .menu-item:nth-child(5) { transition-delay: 0.35s; }
-.mobile-menu.active .menu-item:nth-child(6) { transition-delay: 0.4s; }
+    .mobile-menu.active .menu-item:nth-child(1) {
+      transition-delay: 0.15s;
+    }
 
-/* Menu Links */
-.menu-list .nav__link {
-  display: block;
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: white;
-  text-decoration: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 12px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  background: transparent;
-}
+    .mobile-menu.active .menu-item:nth-child(2) {
+      transition-delay: 0.2s;
+    }
 
-.menu-list .nav__link::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 3px;
-  background: var(--secondaryColor, #fbbf24);
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 2px;
-}
+    .mobile-menu.active .menu-item:nth-child(3) {
+      transition-delay: 0.25s;
+    }
 
-.menu-list .nav__link::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(251, 191, 36, 0.1);
-  opacity: 0;
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 12px;
-  z-index: -1;
-}
+    .mobile-menu.active .menu-item:nth-child(4) {
+      transition-delay: 0.3s;
+    }
 
-.menu-list .nav__link:hover::before,
-.menu-list .nav__link.active-link::before {
-  width: 100%;
-}
+    .mobile-menu.active .menu-item:nth-child(5) {
+      transition-delay: 0.35s;
+    }
 
-.menu-list .nav__link:hover::after,
-.menu-list .nav__link.active-link::after {
-  opacity: 1;
-}
+    .mobile-menu.active .menu-item:nth-child(6) {
+      transition-delay: 0.4s;
+    }
 
-.menu-list .nav__link:hover,
-.menu-list .nav__link.active-link {
-  color: var(--secondaryColor, #fbbf24);
-  transform: translateX(15px);
-}
+    /* Menu Links */
+    .menu-list .nav__link {
+      display: block;
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      transition: all 0.4s;
+      position: relative;
+    }
 
-.menu-list .nav__link:active {
-  transform: translateX(12px) scale(0.98);
-}
+    .menu-list .nav__link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 3px;
+      background: #ffcc00;
+      transition: width 0.4s;
+      border-radius: 2px;
+    }
 
-/* Prevent body scroll when menu is open */
-body.menu-open {
-  overflow: hidden;
-  height: 100vh;
-}
+    .menu-list .nav__link:hover::before,
+    .menu-list .nav__link.active-link::before {
+      width: 100%;
+    }
 
-/* Add a subtle overlay backdrop */
-.mobile-menu::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at top right, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  pointer-events: none;
-}
+    .menu-list .nav__link:hover,
+    .menu-list .nav__link.active-link {
+      color: #ffcc00;
+      transform: translateX(15px);
+    }
 
-.mobile-menu.active::before {
-  opacity: 1;
-}
+    body.menu-open {
+      overflow: hidden;
+    }
 
-/* Desktop Styles */
-@media (min-width: 768px) {
-  .hamburger {
-    display: none;
-  }
-  
-  .mobile-menu {
-    position: static;
-    transform: none;
-    width: auto;
-    height: auto;
-    background: transparent;
-    overflow: visible;
-    opacity: 1;
-  }
-  
-  .mobile-menu::before {
-    display: none;
-  }
-  
-  .close-button {
-    display: none;
-  }
-  
-  .menu-content {
-    height: auto;
-    padding: 0;
-  }
-  
-  .menu-list {
-    flex-direction: row;
-    gap: 1.25rem;
-  }
-  
-  .menu-item {
-    opacity: 1;
-    transform: none;
-  }
-  
-  .menu-list .nav__link {
-    font-size: 1rem;
-    font-weight: 400;
-    padding: 0.5rem 0;
-  }
-  
-  .menu-list .nav__link::after {
-    display: none;
-  }
-  
-  .menu-list .nav__link:hover {
-    transform: none;
-    text-shadow: none;
-  }
-  
-  .menu-list .nav__link:active {
-    transform: none;
-  }
-}
+    /* Desktop Navigation - Show at 768px and above */
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
 
+      .mobile-menu {
+        position: static;
+        transform: none;
+        width: auto;
+        height: auto;
+        background: transparent;
+        overflow: visible;
+        opacity: 1;
+      }
+
+      .close-button {
+        display: none;
+      }
+
+      .menu-content {
+        height: auto;
+        padding: 0;
+      }
+
+      .menu-list {
+        flex-direction: row;
+        gap: 2rem;
+      }
+
+      .menu-item {
+        opacity: 1;
+        transform: none;
+      }
+
+      .menu-list .nav__link {
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 0.5rem 0;
+      }
+
+      .menu-list .nav__link:hover,
+      .menu-list .nav__link.active-link {
+        transform: none;
+      }
+    }
+
+    /* Menu Grid Responsive Layout */
+
+    .menu-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+
+    /* Mobile - 1 column */
+    @media (min-width: 640px) {
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+    }
+
+    /* Tablet - 2 columns */
+    @media (min-width: 768px) {
+      .menu-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+      }
+    }
+
+    /* Desktop - 4 columns */
+    @media (min-width: 1024px) {
+      .menu-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
+      }
+    }
+
+    /* Large Desktop - 5 columns */
+    @media (min-width: 1280px) {
+      .menu-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2rem;
+      }
+    }
+
+    /* Extra Large - 6 columns */
+    @media (min-width: 1536px) {
+      .menu-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 2rem;
+      }
+    }
   </style>
 
   <title>responsive || burger website</title>
@@ -290,19 +306,22 @@ body.menu-open {
 
 
   <!-- -------------- Header ----------------->
- <header class="bg-primaryColor fixed top-0 left-0 w-full z-50" id="header">
-    <nav class="container relative h-14 flex justify-between items-center px-4">
+  <header class="header" id="header">
+    <nav class="container h-18 md:h-20 flex justify-between items-center">
+      <!-- Logo -->
       <div>
-        <a href="#" class="text-2xl uppercase font-oswald">Bur<span class="text-secondaryColor">ger</span></a>
+        <a href="#" class="text-2xl md:text-3xl uppercase font-oswald font-bold">
+          Bur<span class="text-secondaryColor">ger</span>
+        </a>
       </div>
-      
+
       <!-- Mobile Menu - Full Screen Overlay -->
       <div id="nav-menu" class="mobile-menu">
-        <!-- Close Button (X) -->
+        <!-- Close Button -->
         <div class="close-button" id="nav-close">
           <i class="fa-solid fa-xmark"></i>
         </div>
-        
+
         <!-- Menu Content -->
         <div class="menu-content">
           <ul class="menu-list">
@@ -310,16 +329,16 @@ body.menu-open {
               <a href="#home" class="nav__link active-link">Home</a>
             </li>
             <li class="menu-item">
+              <a href="#category" class="nav__link">Menu</a>
+            </li>
+            <li class="menu-item">
+              <a href="#promo" class="nav__link">Promotions</a>
+            </li>
+            <li class="menu-item">
               <a href="#about" class="nav__link">About</a>
             </li>
             <li class="menu-item">
-              <a href="#education" class="nav__link">Education</a>
-            </li>
-            <li class="menu-item">
-              <a href="#services" class="nav__link">Services</a>
-            </li>
-            <li class="menu-item">
-              <a href="#projects" class="nav__link">Projects</a>
+              <a href="#review" class="nav__link">Reviews</a>
             </li>
             <li class="menu-item">
               <a href="#contact" class="nav__link">Contact</a>
@@ -327,13 +346,13 @@ body.menu-open {
           </ul>
         </div>
       </div>
-      
+
       <!-- Hamburger Icon -->
       <div class="hamburger" id="hamburger">
         <i class="fa-solid fa-bars"></i>
       </div>
     </nav>
-</header>
+  </header>
 
 
   <!-- ---------------Home------------------ -->
@@ -506,7 +525,7 @@ body.menu-open {
 
   <!------------------ Menu -------------->
 
-  <section id="menu">
+  <section id="menu" class="my-10">
     <div class="container">
       <div class="max-w-md mx-auto text-center">
         <h2 class="section__title">Our Best Menu</h2>
@@ -524,7 +543,7 @@ body.menu-open {
       </div>
 
       <div>
-        <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+        <ul class="menu-grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 lg:gap-12">
 
           <!-- food -->
           <li class="item_wrap food">
@@ -998,6 +1017,10 @@ body.menu-open {
         // when window width is >= 1024px
         1024: {
           slidesPerView: 3,
+        },
+        // when window width is >= 1280pxs
+        1280: {
+          slidesPerView: 4,
         }
       }
     });
